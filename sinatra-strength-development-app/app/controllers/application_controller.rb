@@ -11,7 +11,7 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       redirect "users/#{current_user}"
     else 
-    erb :'users/index'
+    erb :'index'
     end
   end 
 
@@ -31,4 +31,4 @@ helpers do
 
 end
 
-end
+

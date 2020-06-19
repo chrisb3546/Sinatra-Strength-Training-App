@@ -1,1 +1,7 @@
-<h1>  index page </h1>
+
+    <% if  logged_in? %>
+    <a href ="/logout">Logout</a>
+   
+    <% elsif !logged_in?%>
+    <p> Please <a href="/create account">Create account</a> or <a href="/login">Log In</a> to continue.
+    <% end %>
