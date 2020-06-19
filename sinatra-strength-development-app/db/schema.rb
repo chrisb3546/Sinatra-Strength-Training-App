@@ -17,13 +17,15 @@ ActiveRecord::Schema.define(version: 2) do
     t.string  "username"
     t.string  "lift_name"
     t.integer "user_id"
+    t.integer "weight"
+    t.integer "repetitions"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string  "username"
-    t.string  "email"
-    t.string  "password_digest"
-    t.integer "lifts"
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
+    t.string "lifts"
   end
 
 end
