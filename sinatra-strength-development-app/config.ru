@@ -6,4 +6,6 @@ end
 
 
 use Rack::MethodOverride
+use LiftsController
+use UsersController
 run ApplicationController
