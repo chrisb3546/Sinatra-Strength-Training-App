@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2) do
 
   create_table "lifts", force: :cascade do |t|
     t.string  "username"
-    t.string  "lift_name"
+    t.string  "name"
     t.integer "user_id"
     t.integer "weight"
     t.integer "repetitions"

@@ -1,6 +1,7 @@
-<h1> Welcome, <%=current_user.username%></h1>
+
 
 <% Lift.all.each do |lift|%>
-     <h2><%="#{lift.username}, #{lift.name}, #{lift.weight},for #{reps}"%></h2>
+     <h2><%=" ID.#{lift.id}, #{lift.name}, #{lift.weight},for #{lift.repetitions}"%></h2>
+     
 
 <%end%>
