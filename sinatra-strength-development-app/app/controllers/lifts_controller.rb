@@ -60,19 +60,13 @@ end
     
       end
 
-      delete '/lifts/:id/delete' do
-        if logged_in?
-          @lift = Lift.find(params[:id])
-        end
-          if @lift.user_id == current_user.id
-            @lift = lift.find_by_id(params[:id])
-            @lift.delete
-            redirect to '/lifts'
-          else
-            redirect to '/lifts'
-          end
+      delete '/lifts/:id' do
+        if !logged_in?
+            redirect to '/login'
         else
-          redirect to '/login'
+            @lift = Lift.find(params[:id])
+            @lift.destroy
+            redirect to '/lifts'
         end
       end
 

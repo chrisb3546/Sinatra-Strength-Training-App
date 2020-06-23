@@ -9,7 +9,7 @@
 <%Lift.all.each do |lift|%>
     <% if lift.user_id == current_user.id %>
        <h3> <%= " ID.#{lift.id}, #{lift.name}, #{lift.weight},for #{lift.repetitions}" %></h3>
-            
+       <a href ="/lifts/<%=lift.id%>">View</a>
        
         Your next lift will be (round to nearest 5lbs for weight projections)
         <%if lift.repetitions > 25 %>

@@ -85,6 +85,12 @@ helpers do
      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
   end 
+
+  def current_lift
+    if logged_in?
+      @current_lift == Lift.find_by(id: params[:id])
+    end
+  end
   
 
 

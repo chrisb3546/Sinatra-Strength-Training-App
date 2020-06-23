@@ -1,14 +1,15 @@
 <h1> Your Lift</h1>
 
 
-<%= @lift.name %>,
+<h2><%= @lift.name %>, <%= @lift.weight.to_s %>, for <%= @lift.repetitions.to_s %> repetitions </h2>
 
-<%= @lift.weight.to_s %>,
 
-for
-<%= @lift.repetitions.to_s %>
 
-repetitions
+<a href ="/lifts/<%=@lift.id %>/edit">Edit</a>
+
+<form action="/lifts/<%= @lift.id %>" method="post" >
+    <input id="hidden" type="hidden" name="_method" value="delete"/>
+    <input type="submit" value="Delete" />
 
 
 
