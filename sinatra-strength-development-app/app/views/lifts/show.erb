@@ -1,3 +1,4 @@
+<%if logged_in? && @lift.user_id == current_user.id%>
 <h1> Your Lift</h1>
 
 
@@ -10,6 +11,13 @@
 <form action="/lifts/<%= @lift.id %>" method="post" >
     <input id="hidden" type="hidden" name="_method" value="delete"/>
     <input type="submit" value="Delete" />
+    <%else %>
+
+    <h1> You aren't authorized to edit this information </h1>
+
+
+    
+    <%end%>
 
 
 

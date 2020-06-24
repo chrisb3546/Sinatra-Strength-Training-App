@@ -3,9 +3,6 @@ class LiftsController < ApplicationController
     get '/lifts' do
         
             erb :'users/show'
-            
-         
-       
     end 
     
 
@@ -21,15 +18,20 @@ class LiftsController < ApplicationController
         if params[:name].empty? || params[:weight].empty? || params[:repetitions].empty?
             redirect 'lifts/new'
         else
-       @lift = Lift.create(username: current_user.username, name: params[:name], user_id: current_user.id, weight: params[:weight], repetitions: params[:repetitions])
-       redirect "/lifts/#{@lift.id}"
-        end 
+       lift = Lift.new(username: current_user.username, name: params[:name], user_id: current_user.id, weight: params[:weight], repetitions: params[:repetitions])
+       lift.save
+       redirect "/lifts/#{lift.id}"
+     
+       
+        
+    end 
       
     end
 
     get '/lifts/:id' do 
         if logged_in?
-        @lift = Lift.find_by(id: params[:id])
+
+        @lift = Lift.find_by(user_id: params[:id])
         erb :'lifts/show'
         else
             redirect '/login'

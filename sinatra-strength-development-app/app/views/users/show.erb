@@ -1,3 +1,5 @@
+<%if logged_in? && @user.id == current_user.id%>
+
 <h1> Welcome, <%=current_user.username%></h1>
 
 
@@ -8,8 +10,9 @@
 
 <%Lift.all.each do |lift|%>
     <% if lift.user_id == current_user.id %>
-       <h3> <%= " ID.#{lift.id}, #{lift.name}, #{lift.weight},for #{lift.repetitions}" %></h3>
-       <a href ="/lifts/<%=lift.id%>">View</a>
+       <h3> <%= "#{lift.name}, #{lift.weight},for #{lift.repetitions}" %></h3>
+       
+       <a href ="/lifts/<%= lift.id %>">View</a>
        
         Your next lift will be (round to nearest 5lbs for weight projections)
         <%if lift.repetitions > 25 %>
@@ -17,11 +20,15 @@
         <%elsif  lift.repetitions <= 25 && lift.repetitions > 12 %>
         <%=lift.weight * 1.1%> lbs for as many repetitions as you can do.
         <%elsif lift.repetitions == 12 %>
-        <%=lift.weight * 1.07%> for 10 repetitions.
+        <%=lift.weight * 1.03%> for 11 repetitions.
+        <%elsif lift.repetitions == 11 %>
+        <%=lift.weight * 1.03%> for 10 repetitions.
         <%elsif lift.repetitions == 10 %>
-        <%= lift.weight * 1.06 %> for 8 repetitions. 
+        <%= lift.weight * 1.03 %> for 9 repetitions.
+        <%elsif lift.repetitions == 9 %>
+        <%= lift.weight * 1.03 %> for 8 repetitions.
         <%elsif lift.repetitions <= 8 %>
-        (After you get to this point, restart with the first weight you did and try to break your old repetition record, then restart the cycle!)
+        Restart cycle with original weight and try to beat your old record!
 
 
 
@@ -29,3 +36,11 @@
         <%end%>
         <%end %>
         <%end %>
+        
+        <% else %>
+
+        <h1> You aren't authorized to view this information </h1>
+
+
+    
+        <%end%>
