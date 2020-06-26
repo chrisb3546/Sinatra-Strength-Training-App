@@ -2,6 +2,8 @@
 First edition of strength training system implemented in a web application. Once you make an account, all you have to do is plug in your numbers from your compound lifts, and the apps functionality will take you the rest of the way.
 # License
 
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
 # Installation Guide
 Clone project in terminal.
 Run your server.
