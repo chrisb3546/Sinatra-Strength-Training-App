@@ -1,4 +1,10 @@
+
+<% if flash[:message]%>
+    <%=flash[:message]%>
+    <%end%>
 <h3>Create Account</h3>
+<a href ="/"> Home</a>
+
 <form action="/signup" method="POST">
     <input type="text" name="username" placeholder="Username:">
     <input type="text" name="email" placeholder="Email:">

@@ -1,19 +1,22 @@
 <%if logged_in? && @lift.user_id == current_user.id%>
 <h1>Edit a Lift</h1>
 
+<% if flash[:message]%>
+    <h2> <%=flash[:message]%></h2>
+    <%end%>
 
 <form action="/lifts/<%= @lift.id %>" method="post" >
 	<input id="hidden" type="hidden" name="_method" value="patch"/>
 
-	<label>Current lift: "<%= @lift.name %>"</label>
-    Lift:
+	<label>Current lift: </label>
+     "<%= @lift.name %>"
     <input type="text" name="name"><br>
     Weight:
-    <input type="number" name="weight"><br>
+    <input type="number" name="weight">  Current Weight:"<%= @lift.weight%>"<br>
     Repetitions:
-    <input type="number" name="repetitions"><br>
+    <input type="number" name="repetitions"> Current Repetitions:"<%= @lift.repetitions%>"<br>
 
-	<input type="submit" value="Edit" id='submit'/>
+	<input type="submit" value="Make Changes" id='submit'/>
 
 </form>
 <%else %>

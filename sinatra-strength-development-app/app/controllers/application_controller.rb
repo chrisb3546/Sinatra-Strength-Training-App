@@ -1,4 +1,7 @@
 require './config/environment'
+require 'sinatra/base'
+require 'sinatra/flash'
+
 
 class ApplicationController < Sinatra::Base
 
@@ -7,13 +10,14 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, ENV.fetch("SECRET")
+    register Sinatra::Flash
   end
 
   get '/' do
     if logged_in?
       redirect "users/#{current_user.id}"
     else 
-    erb :'index'
+    erb :'welcome'
     end 
     
   end 

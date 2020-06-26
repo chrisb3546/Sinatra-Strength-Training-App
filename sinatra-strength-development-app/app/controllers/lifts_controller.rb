@@ -1,7 +1,7 @@
 class LiftsController < ApplicationController
    
     get '/lifts' do
-        
+        @user = current_user
             erb :'users/show'
     end 
     
@@ -16,25 +16,24 @@ class LiftsController < ApplicationController
 
     post '/lifts' do 
         if params[:name].empty? || params[:weight].empty? || params[:repetitions].empty?
+            flash.next[:message]= "ONE OR MORE FIELDS WITH EMPTY OR INVALID INFORMATION"
             redirect 'lifts/new'
         else
-       lift = Lift.new(username: current_user.username, name: params[:name], user_id: current_user.id, weight: params[:weight], repetitions: params[:repetitions])
-       lift.save
-       redirect "/lifts/#{lift.id}"
-     
-       
-        
-    end 
-      
-    end
+       @lift = Lift.create(username: current_user.username, name: params[:name], user_id: current_user.id, weight: params[:weight], repetitions: params[:repetitions])
+       @lift.save
+       redirect "/lifts/#{@lift.id}"
+         end 
+      end
 
     get '/lifts/:id' do 
-        if logged_in?
-
-        @lift = Lift.find_by(user_id: params[:id])
+        if logged_in? && @lift = Lift.find_by(id: params[:id])
         erb :'lifts/show'
+        elsif !@lift = Lift.find_by(id: params[:id])
+    
+            redirect 'lifts/new'
         else
             redirect '/login'
+         
     end
 end
     get '/lifts/:id/edit' do
@@ -53,6 +52,7 @@ end
         @lift = Lift.find(params[:id])
     
         if params[:name].empty? || params[:weight].empty? || params[:repetitions].empty?
+            flash.next[:message]= "ONE OR MORE FIELDS WITH EMPTY OR INVALID INFORMATION"
           redirect to "/lifts/#{@lift.id}/edit"
         end
     
@@ -63,14 +63,22 @@ end
       end
 
       delete '/lifts/:id' do
-        if !logged_in?
-            redirect to '/login'
-        else
-            @lift = Lift.find(params[:id])
+        if logged_in? 
+            @lift = Lift.find_by(id: params[:id])
+            if @lift && current_user == @lift.user
             @lift.destroy
             redirect to '/lifts'
+
+            elsif !@lift
+                redirect '/lifts'
+            
+            else
+            redirect to '/login'
         end
+           
       end
+      redirect '/login'
+    end 
 
 
 end
