@@ -9,13 +9,12 @@
 	<input id="hidden" type="hidden" name="_method" value="patch"/>
 
 	<label>Current lift: </label>
-     "<%= @lift.name %>"
-    <input type="text" name="name"><br>
+    
+    <input type="text" value="<%= @lift.name %>"name="name"><br>
     Weight:
-    <input type="number" name="weight">  Current Weight:"<%= @lift.weight%>"<br>
+    <input type="number" value="<%= @lift.weight%>" name="weight"> <br>
     Repetitions:
-    <input type="number" name="repetitions"> Current Repetitions:"<%= @lift.repetitions%>"<br>
-
+    <input type="number" value="<%= @lift.repetitions%>" name="repetitions"> 
 	<input type="submit" value="Make Changes" id='submit'/>
 
 </form>
